@@ -114,3 +114,37 @@ gapminder_leido <- read.csv("gapminder.csv")
 # ...
 # Ingresa tu código aquí
 # ...
+resumen_total <- gapminder %>%
+  filter(year == 2007) %>%
+  group_by(continent) %>%
+  summarise(
+    esperanza_vida_promedio = mean(lifeExp),
+    pib_percapita_promedio = mean(gdpPercap),
+    poblacion_total = sum(pop)
+  )
+
+print(resumen)
+
+n_continentes <- gapminder %>% 
+  distinct(continent) %>% 
+  nrow()
+
+n_paises <- gapminder %>% 
+  distinct(country) %>% 
+  nrow()
+
+n_paises_continente <- gapminder %>%
+  filter(year == 2007) %>%
+  group_by(continent) %>%
+  summarise(paises = n_distinct(country))
+
+gapminder %>% group_by(continent) %>%
+  summarise(
+    paises = lenght(unique(conutry))
+  )
+
+
+print(paste("Continentes:", n_continentes))
+print(paste("Países:", n_paises))
+print(paste("Países x continente:", n_paises_continente))
+
